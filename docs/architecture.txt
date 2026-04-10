@@ -1,0 +1,34 @@
+AI Autonomous Navigation System Architecture
+
+Input: Simulation Environment (Pygame 2D Grid)
+  |
+  v
+Perception Module (OpenCV)
+- Camera feed crop
+- Threshold + Contours -> Obstacle positions
+  |
+  v
+Path Planning (A* Algorithm)
+- Global optimal path from start to goal
+- Accounts for static obstacles
+  |
+  v
+Navigation Logic
+- Follow path[1]
+- Local avoidance using recent obstacles
+  |
+  v
+Action: Update agent position in sim
+  |
+  v
+Output: Rendered sim window + Goal reached!
+
+Data Flow:
+sim.get_camera_feed() -> perception.detect() -> planner.plan() -> nav.next_pos() -> sim.update_agent()
+
+Block Diagram (Text):
++-------------+     +-------------+     +-------------+
+| Simulation  | --> | Perception  | --> | Path Planner| --> Navigation --> Sim Update
+| (Pygame)    |     | (OpenCV)    |     | (A*)        |
++-------------+     +-------------+     +-------------+
+
